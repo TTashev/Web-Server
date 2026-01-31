@@ -96,8 +96,8 @@ void* handleHttpRequest(void * socketData)
 	std::size_t findEndPoint = bufferStr.find('/');
 	std::size_t userAgentEndPoint = bufferStr.find("user-agent", findEndPoint);
 	if(userAgentEndPoint != std::string::npos)
-	{
-	    std::string userAgentStr = "User-Agent: ";
+        {
+            std::string userAgentStr = "User-Agent: ";
             std::size_t start = bufferStr.find("User-Agent: ");
             start += userAgentStr.length();
             size_t end = bufferStr.find("\r\n", start);
@@ -105,12 +105,12 @@ void* handleHttpRequest(void * socketData)
             {
                 std::cout << bufferStr.substr(start, end - start) << "\n";
             }
-	}
+        }
 
         if(buffer[std::distance(buffer.begin(), ++it)] == ' ') 
         {
 	    int writeRes = write(clientSocketFD, messageSuccess.data(), messageSuccess.size());
-	    if(writeRes < 0)
+            if(writeRes < 0)
             {
                 std::cout << "Write to socket err" << writeRes << "\n";
             }
@@ -135,7 +135,7 @@ int main(int argc, char** argv)
     if(argc < 2)
     {
         std::cerr << "Port not found" << std::endl;
-	return 1;
+        return 1;
     }
     int socketFD = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -163,7 +163,7 @@ int main(int argc, char** argv)
     {
         struct sockaddr_in clientAddress;
         int clientAddressSize = sizeof(struct sockaddr_in);
-	int * clientSocketFD = new int;
+        int * clientSocketFD = new int;
         *clientSocketFD = accept(socketFD, (struct sockaddr *) &clientAddress, (socklen_t*)&clientAddressSize);
         if(*clientSocketFD > 0)
         {
