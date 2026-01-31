@@ -132,14 +132,14 @@ void* handleHttpRequest(void * socketData)
 
 int main(int argc, char** argv)
 {
-    int port = atoi(argv[1]);
-    if(argc < 0)
+    if(argc < 2)
     {
         std::cerr << "Port not found" << std::endl;
 	return 1;
     }
     int socketFD = socket(AF_INET, SOCK_STREAM, 0);
 
+    int port = atoi(argv[1]);
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_port = htons(port);
